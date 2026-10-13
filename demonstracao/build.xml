@@ -1,26 +1,28 @@
 <project name="HelloAnt" default="jar">
   <property name="src" value="src"/>
   <property name="build" value="build"/>
+  <property name="dist" value="dist"/>
 
-  <target name="clean">
+  <target name="clean" description="Apaga as pastas build/ e dist/">
     <delete dir="${build}"/>
-    <delete dir="dist"/>
+    <delete dir="${dist}"/>
   </target>
 
-  <target name="compile">
+  <target name="compile" description="Compila os fontes de src/ para build/">
     <mkdir dir="${build}"/>
     <javac srcdir="${src}" destdir="${build}" includeantruntime="false"/>
   </target>
 
-  <target name="jar" depends="compile">
-    <jar destfile="dist/hello.jar" basedir="${build}">
+  <target name="jar" depends="compile" description="Empacota as classes em dist/hello.jar">
+    <mkdir dir="${dist}"/>
+    <jar destfile="${dist}/hello.jar" basedir="${build}">
       <manifest>
         <attribute name="Main-Class" value="HelloAnt"/>
       </manifest>
     </jar>
   </target>
 
-  <target name="run" depends="jar">
-    <java jar="dist/hello.jar" fork="true"/>
+  <target name="run" depends="jar" description="Executa o hello.jar">
+    <java jar="${dist}/hello.jar" fork="true"/>
   </target>
 </project>
