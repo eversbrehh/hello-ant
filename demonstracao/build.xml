@@ -1,0 +1,26 @@
+<project name="HelloAnt" default="jar">
+  <property name="src" value="src"/>
+  <property name="build" value="build"/>
+
+  <target name="clean">
+    <delete dir="${build}"/>
+    <delete dir="dist"/>
+  </target>
+
+  <target name="compile">
+    <mkdir dir="${build}"/>
+    <javac srcdir="${src}" destdir="${build}" includeantruntime="false"/>
+  </target>
+
+  <target name="jar" depends="compile">
+    <jar destfile="dist/hello.jar" basedir="${build}">
+      <manifest>
+        <attribute name="Main-Class" value="HelloAnt"/>
+      </manifest>
+    </jar>
+  </target>
+
+  <target name="run" depends="jar">
+    <java jar="dist/hello.jar" fork="true"/>
+  </target>
+</project>
