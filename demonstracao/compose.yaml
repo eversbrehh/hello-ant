@@ -1,0 +1,7 @@
+services:
+  demo:
+    build: .
+    image: hello-ant
+    working_dir: /demo
+    volumes:
+      - .:/demo
